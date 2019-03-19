@@ -17,5 +17,23 @@ export default class Library {
 	}
 	listAllBooks() {
 		console.table(this.bookList);
+		console.log(this.currentBook);
+		console.log(this.nextBook);
+	}
+	startReadingNextBook() {
+		if (this.nextBook !== null) {
+			this.currentBook = this.nextBook;
+			this.nextBook = null;
+			for (let book of this.bookList) {
+				if (!book.isRead && book !== this.currentBook) {
+					this.nextBook = book;
+					break;
+				}
+			}
+		}
+		// mame dalsi knihu na cteni?
+		// ano -> 
+		// - zapis ji do aktualne ctene knihy
+		// - do pristi knihy dej prvni neprectenou, ktera neni ta aktualni
 	}
 }

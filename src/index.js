@@ -6,8 +6,11 @@ import Library from './library';
 let knihovna = new Library();
 
 knihovna.addBook( new Book('Wilbur Smith', 'Řeka bohů', 1980) );
+knihovna.addBook( new Book('Wilbur Smith', 'Řeka bohů 2', 1983) );
 knihovna.listAllBooks();
 
+knihovna.startReadingNextBook();
+knihovna.listAllBooks();
 
 // Třída Knihovna
 // - seznam knih (pole)
