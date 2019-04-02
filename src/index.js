@@ -5,7 +5,10 @@ let query = fetch(`${apiUrl}?APPID=${apiKey}&q=Brno&units=metric&lang=cz`);
 
 query
 .then(response => response.json())
-.then(displayWeather);
+.then(displayWeather)
+.catch(error => {
+	console.log(error);
+});
 
 function displayWeather(data) {
 	const cityEl = document.querySelector('#mesto');
