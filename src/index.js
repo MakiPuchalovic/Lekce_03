@@ -1,64 +1,19 @@
-import Book from './book';
-import Library from './library';
+const apiKey = 'b4c737ebf27b5879306544b3f666163c';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
-// kniha.read();
+let query = fetch(`${apiUrl}?APPID=${apiKey}&q=Brno&units=metric&lang=cz`);
 
-let knihovna = new Library();
+query
+.then(response => response.json())
+.then(displayWeather);
 
-knihovna.addBook( new Book('Wilbur Smith', 'Řeka bohů', 1980) );
-knihovna.addBook( new Book('Wilbur Smith', 'Řeka bohů 2', 1983) );
-knihovna.listAllBooks();
-
-knihovna.startReadingNextBook();
-knihovna.listAllBooks();
-
-// Třída Knihovna
-// - seznam knih (pole)
-// - posledni prectena kniha
-// - aktualne ctena kniha 
-// - dalsi kniha na precteni 
-// - pocet neprectenych knih
-// + přidat knihu 
-// + vypsat knihy
-// + precist aktualni knihu
-
-
-// Třída Kniha 
-// - autor 
-// - název 
-// - rok vydání 
-// - přečtená?
-
-
-
-
-
-
-
-
-
-
-
-
-// import Animal from './animal';
-// import Dog from './dog';
-// import Person from './person';
-
-// let osoba = new Person('Jana', 'Nováková');
-
-// osoba.fullName = 'Jára Cimrman';
-
-// console.log( osoba.fullName );
-// osoba.greet();
-
-// let zvire = new Animal('Bob', 20);
-
-// zvire.run();
-
-// let alík = new Dog('Alík', 10, 'Haf, haf, haf');
-// alík.run();
-// alík.bark();
-
-// let baryk = new Dog('Baryk', 15, 'woof');
-// baryk.run();
-// baryk.bark();
+function displayWeather(data) {
+	const cityEl = document.querySelector('#mesto');
+	const weatherEl = document.querySelector('#pocasi');
+	const tempEl = document.querySelector('#teplota');
+	const iconEl = document.querySelector('#ikona');
+	cityEl.textContent = data.name;
+	weatherEl.textContent = data.weather[0].description;
+	tempEl.textContent = data.main.temp;
+	iconEl.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+}
